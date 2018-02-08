@@ -1,0 +1,25 @@
+{% extends 'parent.jinja2' %}
+
+{% block content %}
+    <div class="container">
+        <form action method="POST">
+            <form>
+                {{ form.hidden_tag() }}
+                <div class="form-group row">
+                    {{ form.url.label(class='mt-5 col-sm-12 col-form-label') }}
+                    {% if form.errors %}
+                        {{ form.url(class="col-sm-12 form-control mb-2 is-invalid") }}
+                        <div class="invalid-feedback mb-3">
+                            {% for e in form.url.errors %}
+                                {{ e }}<br/>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.url(class="col-sm-12 form-control mb-2") }}
+                    {% endif %}
+                    {{ form.submit(class="col-sm-12 btn btn-success btn-block") }}
+                </div>
+            </form>
+        </form>
+    </div>
+{% endblock %}

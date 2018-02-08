@@ -1,0 +1,26 @@
+{% extends 'parent.jinja2' %}
+
+{% if check.code in ['CONN_ERR', 'DOWN', 'UNKNOWN'] %}
+    {% set color='text-danger' %}
+    {% set status='is down' %}
+{% elif check.code in ['SLOW', 'FLAPPY'] %}
+    {% set color='text-info' %}
+    {% set status='is slow or flappy' %}
+{% elif check.code in ['HTTP_4xx', 'HTTP_5xx'] %}
+    {% set color='text-warning' %}
+    {% set status='has returned HTTP error' %}
+{% else %}
+    {% set color='text-success' %}
+    {% set status='is up' %}
+{% endif %}
+
+{% block content %}
+    <div class="media col-6 offset-3 mt-5">
+        <div class="media-body text-center">
+            <h3 class="mt-0 text-center">{{ check.url }}</h3>
+            <h5 class="mt-0 text-center {{ color }}"><strong>{{ status }}</strong></h5>
+            <br/><br/>
+            <p class="mb-0">{{ check.description }} <em>(status: {{ check.code }})</em></p>
+        </div>
+    </div>
+{% endblock %}
