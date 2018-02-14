@@ -3,7 +3,6 @@ from os import environ
 from flask import Flask
 
 from .blueprints import register_blueprints
-from .models import db, create_all
 
 
 def create_app():
@@ -56,7 +55,4 @@ def register_error_handlers(app):
 
 
 def initialize_extensions(app):
-    # init database
-    db.init_app(app)
-    with app.app_context():
-        create_all()
+    pass
